@@ -1,0 +1,153 @@
+@import "./Colors.scss";
+
+:root {
+  @media (max-width: 768px) {
+    --ratio-1: 0.6;
+    --ratio-2: 0.85;
+  }
+  @media (min-width: 769px) {
+    --ratio-1: 1;
+    --ratio-2: 1;
+  }
+}
+
+html {
+  font-size: 16px;
+
+  @media (min-width: 2000px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 380px) {
+    font-size: 13px;
+  }
+}
+
+@function ratio($px) {
+  @return calc(#{$px} * var(--ratio-1));
+}
+
+@function ratio-2($px) {
+  @return calc(#{$px} * var(--ratio-2));
+}
+
+// ----- grid -----
+$container: 1150px;
+$container-padding: 20px;
+$container-high-end: 70%;
+
+$sidebar-width: 0;
+$content-full: 100%;
+
+// ----- breakpoints -----
+$screen-high-end: 1920px;
+$screen-desktop: 1440px;
+$screen-tablet: 1024px;
+$screen-mobile: 768px;
+$screen-mini: 320px;
+
+// ----- breakpoints for grid drawer -----
+$gd-breakpoints: (
+  "-high-end": $screen-high-end,
+  "-desktop": $screen-desktop,
+  "-tablet": $screen-tablet,
+  "-mobile": $screen-mobile,
+  "-mini": $screen-mini,
+);
+
+// ----- padding -----
+$padding-xs: 0.375rem;
+$padding-submit-btn: 0.5rem;
+$padding-0: 0.625rem;
+$padding-input: 1rem;
+$padding-semi: 1.25rem;
+$padding-1: 1.5625rem;
+$padding-border: 1.875rem;
+$padding-2: 2.5rem;
+$padding-normal: 3.125rem;
+$padding-bigger: 3.75rem;
+$padding-3: 4.375rem;
+$padding-4: 5rem;
+$padding-5: ratio(5.9375rem);
+$padding-section: 10.9375rem;
+
+// ----- margin -----
+$margin-tiny: 0.3125rem;
+$margin-0: 0.625rem;
+$margin-1: 0.9375rem;
+$margin-2: 1.25rem;
+$margin-3: 1.5625rem;
+$margin-4: 2.1875rem;
+$margin-def: ratio(3.125rem);
+$margin-semi: 3.4375rem;
+$margin-5: 5.9375rem;
+$margin-6: ratio(7.5rem);
+
+// ----- font-size -----
+$size-1: 12px;
+$size-2: 14px;
+$size-3: 16px;
+$size-4: 18px;
+$size-5: 20px;
+$size-def: 1.375rem;
+$size-6: 1.75rem;
+$size-6-mobile: 1.5625rem;
+$size-7: 2.625rem;
+$size-semi: 2.3rem;
+$size-8: ratio-2(3.125rem);
+$size-excesive: 7.5rem;
+
+// ----- line-height -----
+$height-1: 1.15;
+$height-2: 1.2;
+$height-3: 1.5;
+// $height-3: 28px;
+
+// ----- letter-spacing -----
+// $spacing-1: 0.05em;
+// $spacing-2: 18px;
+// $spacing-3: 28px;
+
+// ----- font-family -----
+$font-primary: "Gilroy", sans-serif;
+// $font-secondary: "Roboto", sans-serif;
+
+// ----- font color -----
+$color-primary: $gray-1;
+$color-secondary: $seagreen;
+// $color-hover: $secondary-color;
+
+// ----- font weight -----
+
+// $weight-1: 100; 
+// $weight-2: 200;
+$weight-3: 300;
+$weight-4: 400;
+$weight-5: 500;
+// $weight-6: 600;
+$weight-7: 700;
+
+// ----- background -----
+$background-primary: $white;
+$background-secondary: $darkest-purple;
+
+// ----- borders -----
+$border-1: 1px solid $border-purple;
+$border-2: 1px dashed rgba(#22144F, 0.05);
+$border-modal: 1px solid $color-graphics-border-dashed;
+$border-input: 1px solid $color-graphics-popup;
+$border-loader: 8px;
+
+
+// ----- transitions -----
+$ease-flash: 0.05s all ease-in-out;
+$ease-quick: 0.2s all ease-in-out;
+$ease-quick-d: 0.2s 50ms all ease-in-out;
+$ease-slow: 0.35s all ease-in-out;
+
+// ----- shadows -----
+$shadow-modal: 0px 6px 20px -6px rgba(221, 243, 255, 0.6);

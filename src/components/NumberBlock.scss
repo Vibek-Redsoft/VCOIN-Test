@@ -1,0 +1,26 @@
+@import "../styles/Settings.scss";
+
+.number-block {
+  .title-info {
+    .title span {
+      white-space: nowrap;
+    }
+  }
+  h3 {
+    font-weight: $weight-7;
+    font-size: $size-6;
+    line-height: $height-2;
+    margin-top: $margin-2;
+  }
+}
+
+@media (max-width: 768px) {
+  .number-block {
+    .title {
+      max-width: 80%;
+    }
+    .title-info {
+      font-size: 1.2rem;
+    }
+  }
+}

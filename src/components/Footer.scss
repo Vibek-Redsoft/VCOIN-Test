@@ -1,0 +1,157 @@
+@import "../styles/Settings.scss";
+
+.footer {
+  background-color: $background-secondary;
+  padding: $padding-semi 0;
+  flex-shrink: 0;
+
+  .footer-links {
+    li {
+      a,
+      button {
+        color: $white;
+        font-weight: $weight-7;
+        font-size: $size-2;
+        background: none;
+        border: none;
+      }
+
+      & + li {
+        margin-left: $margin-semi;
+      }
+    }
+  }
+
+  .social-links {
+    li + li {
+      margin-left: $margin-2;
+    }
+  }
+}
+
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 5px;
+  height: 5px;
+  border-radius: 8px;
+  background-color: $white;
+  color: $white;
+  box-shadow: 9999px 0 0 -5px $white;
+  animation: dotPulse 1.5s infinite linear;
+  animation-delay: .15s;
+}
+
+.dot-pulse::before, .dot-pulse::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 8px;
+  background-color: $white;
+  color: $white;
+}
+
+.dot-pulse::before {
+  box-shadow: 9984px 0 0 -5px $white;
+  animation: dotPulseBefore 1.5s infinite linear;
+  animation-delay: 0s;
+}
+
+.dot-pulse::after {
+  box-shadow: 10014px 0 0 -5px $white;
+  animation: dotPulseAfter 1.5s infinite linear;
+  animation-delay: .3s;
+}
+
+@keyframes dotPulseBefore {
+  0% {
+    box-shadow: 9984px 0 0 -5px $white;
+  }
+  30% {
+    box-shadow: 9984px 0 0 2px $white;
+  }
+  60%,
+  100% {
+    box-shadow: 9984px 0 0 -5px $white;
+  }
+}
+
+@keyframes dotPulse {
+  0% {
+    box-shadow: 9999px 0 0 -5px $white;
+  }
+  30% {
+    box-shadow: 9999px 0 0 2px $white;
+  }
+  60%,
+  100% {
+    box-shadow: 9999px 0 0 -5px $white;
+  }
+}
+
+@keyframes dotPulseAfter {
+  0% {
+    box-shadow: 10014px 0 0 -5px $white;
+  }
+  30% {
+    box-shadow: 10014px 0 0 2px $white;
+  }
+  60%,
+  100% {
+    box-shadow: 10014px 0 0 -5px $white;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      width: 205px;
+      flex-wrap: wrap;
+      li {
+        &:first-child {
+          margin-bottom: 7px;
+        }
+        & + li {
+          margin-left: 0;
+        }
+        &:nth-child(even) {
+          margin-left: 40px;
+        }
+        button,
+        a {
+          padding: 0;
+          font-size: $size-3;
+          font-weight: $weight-4;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .footer {
+    .container {
+      flex-direction: column;
+    }
+    .social-links {
+      margin-top: 30px;
+      margin-left: 0;
+    }
+    .footer-links {
+      width: #{'max(80%, 263px)'};
+      // flex-direction: row-reverse;
+      li,
+      li:nth-child(even) {
+        width: 50%;
+        margin-left: 0;
+        padding: 0 8.1px;
+        text-align: center;
+      }
+    }
+  }
+}

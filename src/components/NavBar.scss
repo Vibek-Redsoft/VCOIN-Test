@@ -1,0 +1,85 @@
+@import "../styles/Settings.scss";
+
+nav.nav-bar {
+  padding: $padding-2 0;
+  .logo-container {
+    p {
+      font-size: $size-4;
+      color: $gray-1;
+      margin-left: $margin-3;
+    }
+    h1 a {
+      max-width: 144px;
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+  .navigation-items {
+    li {
+      & + li {
+        margin-left: $margin-4;
+      }
+
+      a {
+        font-weight: $weight-7;
+        color: $darkest-purple;
+        font-size: $size-5;
+        line-height: $height-2;
+        text-transform: uppercase;
+
+        &.active {
+          color: $seagreen;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  nav.nav-bar {
+    & > div.flex {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .navigation-items {
+      margin-left: 0;
+      position: absolute;
+      right: 10px;
+      top: 29px;
+      transform: translateY(-50%);
+      margin-top: 0;
+    }
+    .logo-container {
+      flex-direction: column;
+      align-items: flex-start;
+
+      p {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  nav.nav-bar {
+    .logo-container {
+      h1 {
+        width: 100px;
+      }
+    }
+    .navigation-items {
+      li {
+        & + li {
+          margin-left: 17px;
+        }
+
+        a {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}

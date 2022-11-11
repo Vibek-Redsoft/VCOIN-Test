@@ -1,0 +1,179 @@
+@import "../styles/Settings.scss";
+
+.login-modal {
+  .login-form {
+    position: fixed;
+    background-color: $white;
+    padding: $padding-bigger $padding-4;
+    border: $border-modal;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 320px;
+    max-width: 520px;
+    width: calc(21vw + 200px);
+    box-shadow: $shadow-modal;
+    z-index: 10;
+
+    .close-button {
+      position: absolute;
+      top: $padding-1;
+      right: $padding-1;
+      cursor: pointer;
+    }
+    .login-title {
+      margin-top: $margin-semi;
+
+      font-weight: $weight-5;
+      font-size: $size-semi;
+      line-height: $height-2;
+      color: $gray-1;
+    }
+    form {
+      margin-top: $margin-semi;
+
+      .input-container {
+        width: 100%;
+        position: relative;
+
+        & + .input-container {
+          margin-top: $margin-semi;
+        }
+      }
+
+      .error {
+        color: $color-error;
+        align-self: flex-start;
+        transform: translateY(-16px);
+      }
+
+      .focus-input {
+        width: 100%;
+        position: static;
+      }
+      
+      input {
+        width: 100%;
+        color: rgba($gray-1, 0.5);
+        letter-spacing: 0.15px;
+        border: $border-input;
+        padding: $padding-input;
+        line-height: $height-3;
+        background: $white;
+
+        &[type="submit"] {
+          margin-top: $margin-semi;
+
+          border: none;
+          padding: $padding-submit-btn $padding-normal;
+          background: $seagreen;
+          font-weight: $weight-7;
+          color: $white;
+          border-radius: 20px;
+          max-width: 240px;
+        }
+
+        & + .focus-input::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          background-color: $input-focus;
+          height: 1px;
+          transition: $ease-slow;
+        }
+
+        &:focus,
+        &:active {
+          & + .focus-input {
+            &::before {
+              width: 30%;
+              width: #{'max(30%, 80px)'};
+            }
+          }
+        }
+      }
+
+      a {
+        margin-top: $margin-2;
+        align-self: flex-start;
+        margin-left: $margin-1;
+        text-decoration: none;
+        color: $gray-1;
+      }
+    }
+
+    &::before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      background-color: #fff;
+      opacity: 0;
+      pointer-events: none;
+    }
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      border-top: $border-loader solid #48EEC6;
+      border-right: $border-loader solid transparent;
+      animation: spinner .6s linear infinite;
+      pointer-events: none;
+      opacity: 0;
+    }
+    &.awaiting {
+      &::before {
+        opacity: 0.8;
+      }
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+  .login-bg {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+    img {
+      display: block;
+    }
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: $white;
+    opacity: 0.96;
+    z-index: 2;
+  }
+}
+
+@keyframes spinner {
+  to {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+@media (max-width: 768px) {
+  .login-modal {
+    .login-form {
+      padding: 3.75rem 2rem;
+    }
+  }
+}

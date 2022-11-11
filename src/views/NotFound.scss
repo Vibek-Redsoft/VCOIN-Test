@@ -1,0 +1,61 @@
+@import "../styles/Settings.scss";
+
+.not-found {
+  min-height: calc(100vh - 205px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: $padding-5;
+  padding-bottom: $padding-5;
+
+  background: url("../images/section-number-background.png") no-repeat;
+  background-position: 83%;
+
+  h1 {
+    font-weight: $weight-7;
+    font-size: $size-excesive;
+    font-size: clamp(100px, 15vw, 180px);
+    margin-top: 80px;
+    position: relative;
+
+    &::after {
+      content: '';
+      bottom: 6px;
+      top: auto;
+      position: absolute;
+      left: 0;
+      width: 0.6em;
+      height: 0.05em;
+      background-color: #48EEC6;
+      animation: blink 1.2s ease-in-out infinite;
+    }
+  }
+
+  h2 {
+    margin-top: 160px;
+    font-weight: $weight-3;
+    text-align: center;
+
+    & + a {
+      margin-top: 20px;
+      border: none;
+      padding: 11px 50px;
+      background: #48EEC6;
+      font-weight: 700;
+      color: #fff;
+      border-radius: 25px;
+      max-width: 251px;
+      text-decoration: none;
+      font-size: 22px;
+    }
+  }
+}
+
+@keyframes blink {
+  0%{opacity: 1;}
+  50%{opacity: 0.1;}
+  100%{opacity: 1;}
+}
+
+// 205

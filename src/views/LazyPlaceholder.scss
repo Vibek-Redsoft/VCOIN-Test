@@ -1,0 +1,24 @@
+.lazy-loading {
+  .el {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10vw;
+    max-width: 50vh;
+    height: 10vw;
+    max-height: 50vh;
+    border-radius: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    border-top: 8px solid #48EEC6;
+    border-right: 8px solid transparent;
+    animation: spinner .5s linear infinite;
+    pointer-events: none;
+    opacity: 1;
+  }
+}
+
+@keyframes spinner {
+  to {transform: translate(-50%, -50%) rotate(360deg);} 
+}

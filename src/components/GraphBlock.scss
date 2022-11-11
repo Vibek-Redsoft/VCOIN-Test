@@ -1,0 +1,176 @@
+@import "../styles/Settings.scss";
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+.graph-block {
+  width: calc(50% - (#{$margin-5} / 2));
+
+  .chart-title {
+    margin-bottom: $margin-3;
+    
+    strong {
+      margin-right: $margin-1;
+    }
+  }
+  text {
+    font-weight: $weight-5;
+    color: $color-graphics-navigation;
+    font-size: $size-1;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: $color-graphics-legend;
+      border: 1px solid $color-graphics-legend-bg-border;
+      box-sizing: border-box;
+    }
+  }
+  tspan {
+    font-weight: $weight-4;
+    color: #7D74A9;
+    font-size: $size-2;
+  }
+  .block-chart {
+    position: relative;
+    height: clamp(250px, 25vw, 360px);
+
+    .menu {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 2;
+    }
+
+    .controls {
+      transform: scaleX(-1);
+      display: flex;
+      align-content: center;
+      margin-left: 16px;
+
+      @media (min-width: 769px) {
+        .left:not(.end), 
+        .right:not(.end) {
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      picture {
+        display: flex;
+      }
+
+      .left, .right {
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      .left {
+        margin-left: $margin-2;
+      }
+      .right {
+        transform: scaleX(-1);
+      }
+    }
+
+    .end {
+      opacity: 0.45;
+    }
+    .b {
+      font-weight: $weight-4;
+    }
+  }
+  .apexcharts-toolbar,
+  // .apexcharts-xcrosshairs,
+  .apexcharts-xaxistooltip,
+  .apexcharts-tooltip-marker {
+    display: none;
+  }
+  .apexcharts-canvas {
+    cursor: url('../images/graphs-cursor.svg'), auto;
+    background-color: $color-graphics-background;
+  }
+  .apexcharts-tooltip {
+    border-radius: 0;
+  }
+  .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+    padding: 6px 8px;
+    border-bottom: none;
+    margin: 0;
+  }
+  .apexcharts-tooltip-y-group {
+    padding: 0;
+  }
+  .apexcharts-tooltip-series-group {
+    padding: 0 8px 6px 8px;
+  }
+  .apexcharts-tooltip.apexcharts-theme-light {
+    color: $color-graphics-navigation;
+    font-size: $size-1;
+    border: $border-1;
+
+    .apexcharts-tooltip-title {
+      font-weight: $weight-7;
+    }
+    .apexcharts-tooltip-text-label,
+    .apexcharts-tooltip-text-value {
+      font-weight: $weight-3;
+    }
+  }
+  .apexcharts-tooltip.apexcharts-theme-light,
+  .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+    background-color: $color-graphics-background;
+  }
+  .apexcharts-series .apexcharts-area {
+    stroke: $color-graphics-legend-bg-border;
+  }
+  circle.apexcharts-marker {
+    &:hover {
+      stroke: $purple;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .graph-block .block-chart {
+    max-width: 460px;
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.4);
+
+    .menu {
+      top: 7px;
+      right: 9px;
+
+      .controls {
+        .right,
+        .left {
+          border: 1px solid rgba(103, 64, 230, 0.2);
+          padding: 8px;
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.02);
+
+          &.end {
+            box-shadow: none;
+          }
+        }
+      }
+
+      .page-position p {
+        font-size: 16px;
+      }
+    }
+  }
+}

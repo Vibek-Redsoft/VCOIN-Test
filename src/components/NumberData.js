@@ -4,6 +4,7 @@ import "./NumberData.scss";
 import NumberBlock from "./NumberBlock";
 
 import { getObjectFromAPI, thousandsSeparator } from "../helpers/APIFormating";
+import InfoIcon from "./InfoIcon";
 
 // import millify from 'millify';
 
@@ -60,6 +61,7 @@ function NumberData(props) {
 											popup={cell.popup}
 											isLoaded={isLoaded}
 											admin
+											key={`table-cell-${nCell}`}
 										/>
 									</td>
 								)
@@ -109,9 +111,17 @@ function NumberData(props) {
 					{/* <p className="ld-1 default-p">
 						Updated On: {isLoaded ? dateFormated : Loader}
 					</p> */}
-					<p className="ld-1 with-margin">
-						Updated On: {isLoaded ? dateFormatedLatestTransaction : Loader}
-					</p>
+					<div style={{ display: "flex" }}>
+						<p className="ld-1 with-margin">
+							Updated On: {isLoaded ? dateFormatedLatestTransaction : Loader}
+						</p>
+						<InfoIcon
+							className={"info-icon latestTransaction"}
+							text={`Latest job rat at ${dateFormatedLatestTransaction ?? ""}`}
+							key={"latestTransaction"}
+							color="#4000FF"
+						/>
+					</div>
 				</div>
 				<div className="table-wrapper">
 					<table className="data-content">

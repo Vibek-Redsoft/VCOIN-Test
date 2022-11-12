@@ -117,7 +117,7 @@ function NumberData(props) {
 						</p>
 						<InfoIcon
 							className={"info-icon latestTransaction"}
-							text={`Latest job rat at ${dateFormatedLatestTransaction ?? ""}`}
+							text={`Latest job ran at ${dateFormatedLatestTransaction ?? ""}`}
 							key={"latestTransaction"}
 							color="#4000FF"
 						/>

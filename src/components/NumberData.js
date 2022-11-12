@@ -1,10 +1,8 @@
 import React from "react";
 import "./NumberData.scss";
-
-import NumberBlock from "./NumberBlock";
-
-import { getObjectFromAPI, thousandsSeparator } from "../helpers/APIFormating";
 import InfoIcon from "./InfoIcon";
+import NumberBlock from "./NumberBlock";
+import { getObjectFromAPI, thousandsSeparator } from "../helpers/APIFormating";
 
 // import millify from 'millify';
 

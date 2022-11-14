@@ -1,4 +1,5 @@
 import React from "react";
+import metajuiceLogo from "../images/metajuice.png";
 import { NavLink, useLocation } from "react-router-dom";
 
 import "./NavBar.scss";
@@ -15,8 +16,9 @@ function NavBar() {
 							<h1 className="ai-center jc-center flex">
 								<NavLink to="/" exact>
 									<img
-										height="53"
-										src="images/vcoin-logo.svg"
+										height="80"
+										width="300"
+										src={metajuiceLogo}
 										alt="VCOIN Logo"
 									/>
 								</NavLink>

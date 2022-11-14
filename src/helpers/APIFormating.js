@@ -57,7 +57,7 @@ export const GetMonthName = [
 export function getObjectFromAPI(api, access) {
 	const apiJson = api ? JSON.parse(api.Data.Data) : {};
 
-	console.log(apiJson);
+	// console.log(apiJson);
 
 	api = apiJson;
 	return {
@@ -104,10 +104,22 @@ export function getObjectFromAPI(api, access) {
 					prefix: "$",
 				},
 				{
-					private: false,
-					title: "Total VCOIN Wallets",
-					value: api.TotalVCoinUsers,
-					popup: "The number of users who transacted, held or purchased VCOINs",
+					switchData: [
+						{
+							private: false,
+							title: "Total VCOIN Wallets Transacted",
+							value: api.TotalVCoinUsers,
+							popup:
+								"The number of users who transacted, held or purchased VCOINs",
+						},
+						{
+							private: false,
+							title: "Total VCOIN Wallets Non-Transacted",
+							value: 922,
+							popup:
+								"The number of users who transacted, held or purchased VCOINs",
+						},
+					],
 				},
 			],
 			[

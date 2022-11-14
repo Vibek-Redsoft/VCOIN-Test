@@ -1,5 +1,6 @@
 export default async function consumeAPI({ token, userIsSuperAdmin }) {
-	const baseUrl = process.env.REACT_APP_BASE_URL;
+	const baseUrl =
+		"https://us-central1-imvu-vcoin-dashboard-test.cloudfunctions.net";
 	const adminEndpoint = "ConsumeData";
 	const publicEndpoint = "PublicData";
 

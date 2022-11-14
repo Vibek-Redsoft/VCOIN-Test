@@ -35,6 +35,8 @@ function NumberData(props) {
 		? getObjectFromAPI(value, isAdmin)
 		: getObjectFromAPI(false);
 
+	console.log(apiData.numbers);
+
 	const formatNumber = (num) => {
 		// num = +(Math.round(num + "e+2")  + "e-2")
 		num = +Math.round(num);
@@ -111,17 +113,16 @@ function NumberData(props) {
 														  )}`
 														: Loader
 												}
-												popup={cell.popup ?? ""}
-												isLoaded={isLoaded}
 												switchData={false}
+												isLoaded={isLoaded}
+												popup={cell.popup ?? ""}
 											/>
 										)}
-
 										{cell.switchData && (
 											<NumberBlock
-												cell={cell.switchData}
 												isLoaded={isLoaded}
 												switchData={true}
+												cell={cell.switchData}
 											/>
 										)}
 									</td>
@@ -157,12 +158,10 @@ function NumberData(props) {
 							Updated On: {isLoaded ? dateFormatedLatestTransaction : Loader}
 						</p>
 						<InfoIcon
-							// fill="black"
-							// stroke="yellow"
-							className={"info-icon latestTransaction"}
-							text={`Latest job ran at ${dateFormatedLatestTransaction ?? ""}`}
-							key={"latestTransaction"}
 							color="#4000FF"
+							text={`Last successful job run time`}
+							key={"latestTransaction"}
+							className={"info-icon latestTransaction"}
 						/>
 					</div>
 				</div>

@@ -64,7 +64,7 @@ function GraphData(props) {
 		let yyyy;
 		let increment;
 		let target;
-		console.log(data);
+		// console.log(data);
 
 		data?.forEach((block) => {
 			assignedArray = block.value;

@@ -57,7 +57,7 @@ export const GetMonthName = [
 export function getObjectFromAPI(api, access) {
 	const apiJson = api ? JSON.parse(api.Data.Data) : {};
 
-	console.log(apiJson);
+	// console.log(apiJson);
 
 	api = apiJson;
 	return {

@@ -1,8 +1,9 @@
 import React from "react";
 import "./NumberData.scss";
 import InfoIcon from "./InfoIcon";
+import commaNumber from "comma-number";
 import NumberBlock from "./NumberBlock";
-import { getObjectFromAPI, thousandsSeparator } from "../helpers/APIFormating";
+import { getObjectFromAPI } from "../helpers/APIFormating";
 
 // import millify from 'millify';
 
@@ -38,14 +39,44 @@ function NumberData(props) {
 		// num = +(Math.round(num + "e+2")  + "e-2")
 		num = +Math.round(num);
 
-		return thousandsSeparator(num.toString());
+		return commaNumber(num);
 	};
 
 	const Loader = <span className={`is-loading ${error && "error"}`}></span>;
 
 	const renderTable = (admin) => {
-		return apiData.numbers.map((row, nRow) =>
-			row ? (
+		return apiData.numbers.map((row, nRow) => {
+			let filteredData = [];
+			if (nRow === 1) {
+				row.push({
+					private: false,
+					title: "Total VCOIN Wallets Non Transacted",
+					value: 922,
+					popup: "The number of users who didn't do any VCOIN transactions",
+				});
+
+				row?.map((i) => {
+					if (
+						i.title === "Total VCOIN Wallets Non Transacted" ||
+						i.title === "Total VCOIN Wallets"
+					) {
+						filteredData.push(i);
+					}
+				});
+				row.push({ switchData: filteredData });
+
+				const transactedWalletIndex = row.findIndex(
+					(i) => i.title === "Total VCOIN Wallets Non Transacted"
+				);
+				row.splice(transactedWalletIndex, 1);
+
+				const nonTransactedWalletIndex = row.findIndex(
+					(i) => i.title === "Total VCOIN Wallets"
+				);
+				row.splice(nonTransactedWalletIndex, 1);
+			}
+
+			return row ? (
 				<tr key={`table-row-${nRow}`}>
 					{row.map((cell, nCell) => {
 						if (admin) {
@@ -68,27 +99,39 @@ function NumberData(props) {
 							return (
 								!cell.private && (
 									<td key={`table-cell-${nCell}`}>
-										<NumberBlock
-											blockTitle={cell.title}
-											// blockValue={isLoaded ? millify(cell.value) : Loader}
-											blockValue={
-												isLoaded
-													? `${cell.prefix ? "$" : ""}${formatNumber(
-															cell.value
-													  )}`
-													: Loader
-											}
-											popup={cell.popup}
-											isLoaded={isLoaded}
-										/>
+										{!cell.switchData && (
+											<NumberBlock
+												cell={cell}
+												blockTitle={cell.title ?? ""}
+												// blockValue={isLoaded ? millify(cell.value) : Loader}
+												blockValue={
+													isLoaded
+														? `${cell.prefix ? "$" : ""}${formatNumber(
+																cell.value
+														  )}`
+														: Loader
+												}
+												popup={cell.popup ?? ""}
+												isLoaded={isLoaded}
+												switchData={false}
+											/>
+										)}
+
+										{cell.switchData && (
+											<NumberBlock
+												cell={cell.switchData}
+												isLoaded={isLoaded}
+												switchData={true}
+											/>
+										)}
 									</td>
 								)
 							);
 						}
 					})}
 				</tr>
-			) : null
-		);
+			) : null;
+		});
 	};
 
 	return (
@@ -114,6 +157,8 @@ function NumberData(props) {
 							Updated On: {isLoaded ? dateFormatedLatestTransaction : Loader}
 						</p>
 						<InfoIcon
+							// fill="black"
+							// stroke="yellow"
 							className={"info-icon latestTransaction"}
 							text={`Latest job ran at ${dateFormatedLatestTransaction ?? ""}`}
 							key={"latestTransaction"}

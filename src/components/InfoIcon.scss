@@ -1,14 +1,49 @@
 @import "../styles/Settings.scss";
 
 .info-icon {
-	position: absolute;
+	position: relative;
 	top: -6px;
-	right: calc(-#{$margin-2} - 9px);
-	cursor: pointer;
 	padding: 6px;
+	cursor: pointer;
+	// right: calc(-#{$margin-2} - 9px);
 
 	&::after {
 		content: attr(data-text);
+		white-space: normal;
+		max-width: 150px;
+		padding: $padding-0;
+		position: absolute;
+		top: 100%;
+		left: 100%;
+		min-width: 120px;
+		width: auto;
+		width: max-content;
+		z-index: 3;
+
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 16px;
+		color: $color-graphics-navigation;
+		border: $border-1;
+		background-color: $background-primary;
+
+		opacity: 0;
+		pointer-events: none;
+		transition: $ease-quick-d;
+	}
+
+	&:hover,
+	&.mobile-touch {
+		&::after {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+}
+
+.switch-button {
+	&::after {
+		content: attr(switch-text);
 		white-space: normal;
 		max-width: 150px;
 		padding: $padding-0;
@@ -47,6 +82,7 @@
 	right: 0px;
 	cursor: pointer;
 	padding: 6px;
+	color: yellow;
 }
 
 .info-icon.graphBlockIcon {

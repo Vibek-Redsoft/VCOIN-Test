@@ -16,20 +16,11 @@ function NumberBlock(props) {
 		switchData,
 		blockValue,
 		blockTitle,
+		checked,
+		handleChange,
 	} = props;
 	let underlineClass = isLoaded ? "underline-el light def" : "light def ld-2 ";
 	underlineClass += admin && " green";
-
-	const [checked, setChecked] = React.useState(false);
-	const [toggleData, setToggleData] = React.useState(cell[0]);
-
-	React.useEffect(() => {
-		console.log(toggleData);
-	}, [toggleData]);
-
-	const handleChange = () => {
-		setChecked((checked) => !checked);
-	};
 
 	return (
 		<>
@@ -55,9 +46,9 @@ function NumberBlock(props) {
 					<div style={{ display: "flex" }}>
 						<div className="title-info flex ai-center">
 							<div className="title flex ai-baseline">
-								<span className="relative">{toggleData.title}</span>
+								<span className="relative">{blockTitle}</span>
 								<InfoIcon
-									text={toggleData.popup}
+									text={popup}
 									key={key}
 									color="#4000FF"
 									className={"info-icon"}
@@ -67,12 +58,11 @@ function NumberBlock(props) {
 									width={35}
 									onChange={handleChange}
 									checked={checked}
-									// className={"switch-button"}
 								/>
 							</div>
 						</div>
 					</div>
-					<h3 className={underlineClass}>{toggleData.blockValue}</h3>
+					<h3 className={underlineClass}>{blockValue}</h3>
 				</div>
 			)}
 		</>

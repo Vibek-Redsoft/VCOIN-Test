@@ -10,6 +10,12 @@ import { getObjectFromAPI } from "../helpers/APIFormating";
 function NumberData(props) {
 	const { currentUser: isAdmin, value, isLoaded, error } = props;
 
+	const [checked, setChecked] = React.useState(false);
+
+	const handleChange = () => {
+		setChecked((checked) => !checked);
+	};
+
 	// const dateCreated = !!value && new Date(value.Data.CreatedDate).toString().split(' ')
 
 	// const dateWithTimeZone = !!value && new Date(value.Data.CreatedDate);
@@ -35,10 +41,7 @@ function NumberData(props) {
 		? getObjectFromAPI(value, isAdmin)
 		: getObjectFromAPI(false);
 
-	console.log(apiData.numbers);
-
 	const formatNumber = (num) => {
-		// num = +(Math.round(num + "e+2")  + "e-2")
 		num = +Math.round(num);
 
 		return commaNumber(num);
@@ -48,35 +51,35 @@ function NumberData(props) {
 
 	const renderTable = (admin) => {
 		return apiData.numbers.map((row, nRow) => {
-			let filteredData = [];
-			if (nRow === 1) {
-				row.push({
-					private: false,
-					title: "Total VCOIN Wallets Non Transacted",
-					value: 922,
-					popup: "The number of users who didn't do any VCOIN transactions",
-				});
+			// let filteredData = [];
+			// if (nRow === 1) {
+			// 	row.push({
+			// 		private: false,
+			// 		title: "Total VCOIN Wallets Non Transacted",
+			// 		value: 922,
+			// 		popup: "The number of users who didn't do any VCOIN transactions",
+			// 	});
 
-				row?.map((i) => {
-					if (
-						i.title === "Total VCOIN Wallets Non Transacted" ||
-						i.title === "Total VCOIN Wallets"
-					) {
-						filteredData.push(i);
-					}
-				});
-				row.push({ switchData: filteredData });
+			// 	row?.map((i) => {
+			// 		if (
+			// 			i.title === "Total VCOIN Wallets Non Transacted" ||
+			// 			i.title === "Total VCOIN Wallets"
+			// 		) {
+			// 			filteredData.push(i);
+			// 		}
+			// 	});
+			// 	row.push({ switchData: filteredData });
 
-				const transactedWalletIndex = row.findIndex(
-					(i) => i.title === "Total VCOIN Wallets Non Transacted"
-				);
-				row.splice(transactedWalletIndex, 1);
+			// 	const transactedWalletIndex = row.findIndex(
+			// 		(i) => i.title === "Total VCOIN Wallets Non Transacted"
+			// 	);
+			// 	row.splice(transactedWalletIndex, 1);
 
-				const nonTransactedWalletIndex = row.findIndex(
-					(i) => i.title === "Total VCOIN Wallets"
-				);
-				row.splice(nonTransactedWalletIndex, 1);
-			}
+			// 	const nonTransactedWalletIndex = row.findIndex(
+			// 		(i) => i.title === "Total VCOIN Wallets"
+			// 	);
+			// 	row.splice(nonTransactedWalletIndex, 1);
+			// }
 
 			return row ? (
 				<tr key={`table-row-${nRow}`}>
@@ -118,11 +121,42 @@ function NumberData(props) {
 												popup={cell.popup ?? ""}
 											/>
 										)}
-										{cell.switchData && (
+										{cell.switchData && !checked && (
 											<NumberBlock
-												isLoaded={isLoaded}
+												cell={cell}
+												checked={checked}
+												handleChange={handleChange}
+												blockTitle={cell.switchData[0].title ?? ""}
+												// blockValue={isLoaded ? millify(cell.value) : Loader}
+												blockValue={
+													isLoaded
+														? `${
+																cell.switchData[0].prefix ? "$" : ""
+														  }${formatNumber(cell.switchData[0].value)}`
+														: Loader
+												}
 												switchData={true}
-												cell={cell.switchData}
+												isLoaded={isLoaded}
+												popup={cell.switchData[0].popup ?? ""}
+											/>
+										)}
+										{cell.switchData && checked && (
+											<NumberBlock
+												cell={cell}
+												checked={checked}
+												handleChange={handleChange}
+												blockTitle={cell.switchData[1].title ?? ""}
+												// blockValue={isLoaded ? millify(cell.value) : Loader}
+												blockValue={
+													isLoaded
+														? `${
+																cell.switchData[1].prefix ? "$" : ""
+														  }${formatNumber(cell.switchData[1].value)}`
+														: Loader
+												}
+												switchData={true}
+												isLoaded={isLoaded}
+												popup={cell.switchData[1].popup ?? ""}
 											/>
 										)}
 									</td>

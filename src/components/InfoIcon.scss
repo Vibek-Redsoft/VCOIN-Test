@@ -41,41 +41,6 @@
 	}
 }
 
-.switch-button {
-	&::after {
-		content: attr(switch-text);
-		white-space: normal;
-		max-width: 150px;
-		padding: $padding-0;
-		position: absolute;
-		top: 100%;
-		left: 100%;
-		min-width: 120px;
-		width: auto;
-		width: max-content;
-		z-index: 3;
-
-		font-weight: 300;
-		font-size: 14px;
-		line-height: 16px;
-		color: $color-graphics-navigation;
-		border: $border-1;
-		background-color: $background-primary;
-
-		opacity: 0;
-		pointer-events: none;
-		transition: $ease-quick-d;
-	}
-
-	&:hover,
-	&.mobile-touch {
-		&::after {
-			opacity: 1;
-			pointer-events: all;
-		}
-	}
-}
-
 .info-icon.latestTransaction {
 	position: relative;
 	top: 11px;

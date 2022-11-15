@@ -57,10 +57,8 @@ export const GetMonthName = [
 export function getObjectFromAPI(api, access) {
 	const apiJson = api ? JSON.parse(api.Data.Data) : {};
 
-	// console.log(apiJson);
-
 	api = apiJson;
-	return {
+	const response = {
 		title: [
 			"VCOIN Transacted",
 			api.VCoinTransacted,
@@ -239,4 +237,8 @@ export function getObjectFromAPI(api, access) {
 				],
 		],
 	};
+
+	console.log(response);
+
+	return response;
 }

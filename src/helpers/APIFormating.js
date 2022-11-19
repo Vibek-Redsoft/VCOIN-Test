@@ -198,6 +198,12 @@ export function getObjectFromAPI(api, access) {
 					popup:
 						"The amount of VCOINs that have been transacted between users. ",
 				},
+				{
+					oneWeek: api.AllTransactionsForWeek,
+					oneYear: api.AllTransactionsForYear,
+					oneMonth: api.AllTransactionsForMonth,
+					sixMonth: api.AllTransactionsForSixMonth,
+				},
 			],
 			access &&
 				api.ActiveWalletsPerMonth && [
@@ -237,8 +243,6 @@ export function getObjectFromAPI(api, access) {
 				],
 		],
 	};
-
-	console.log(response);
 
 	return response;
 }

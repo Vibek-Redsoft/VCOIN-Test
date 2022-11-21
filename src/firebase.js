@@ -2,14 +2,14 @@ import "firebase/auth";
 import firebase from "firebase/app";
 
 const app = firebase.initializeApp({
-	apiKey: "AIzaSyBS7j4SUFdZ6KoE3AqvhFJbQ6ON_9q05Nc",
-	authDomain: "imvu-vcoin-dashboard-test.firebaseapp.com",
-	databaseURL: "https://imvu-vcoin-dashboard-test.firebaseio.com",
-	projectId: "imvu-vcoin-dashboard-test",
-	storageBucket: "imvu-vcoin-dashboard-test.appspot.com",
-	messagingSenderId: "542956967549",
-	appId: "1:542956967549:web:e9cdf6641505b2c76c8314",
-	measurementId: "G-6ZN8RK09TW",
+	apiKey: "AIzaSyDJ8bkcxrqZoUUVckox5a2GQv56Radv33s",
+	authDomain: "imvu-vcoin-dashboard.firebaseapp.com",
+	databaseURL: "https://imvu-vcoin-dashboard.firebaseio.com",
+	projectId: "imvu-vcoin-dashboard",
+	storageBucket: "imvu-vcoin-dashboard.appspot.com",
+	messagingSenderId: "1032075483864",
+	appId: "1:1032075483864:web:407e5c151d8a99f31315ad",
+	measurementId: "G-WHQYBMP6YG",
 });
 
 export const auth = app.auth();

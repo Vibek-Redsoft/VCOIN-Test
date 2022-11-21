@@ -1,10 +1,8 @@
 import React from "react";
 import "./GraphData.scss";
 import Chart from "./Chart";
-import GraphBlock from "./GraphBlock";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";

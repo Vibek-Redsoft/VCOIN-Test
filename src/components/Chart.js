@@ -34,22 +34,50 @@ function Chart({ data }) {
 	// 	padding: theme.spacing(1),
 	// 	textAlign: "center",
 	// 	color: theme.palette.text.secondary,
-	// }));
+	// }))
+
+	const tickAmountFormatter = (format) => {
+		if (format === "sixMonth") {
+			return 6.2;
+		} else if (format === "oneWeek") {
+			return 6.2;
+		} else if (format === "oneMonth") {
+			return 9;
+		} else if (format === "oneYear") {
+			return 12;
+		} else if (format === "oneDay") {
+			return 23;
+		} else {
+			return "dataPoints";
+		}
+	};
 
 	const getDaysBetweenDates = (startDate, endDate, format) => {
 		let now = startDate.clone();
 		let dates = [];
+		while (now.isSameOrBefore(endDate)) {
+			dates.push(now.format("YYYY-MM-D"));
+			now.add(1, "days");
+		}
+		return dates;
+	};
 
-		if (format === "oneWeek") {
-			while (now.isSameOrBefore(endDate)) {
-				dates.push(now.format("YYYY-MM-D"));
-				now.add(1, "days");
-			}
-		} else {
-			while (now.isSameOrBefore(endDate)) {
-				dates.push(now.format("YYYY-MM-D"));
-				now.add(1, "days");
-			}
+	const getHoursBetweenDates = (startDate, endDate, format) => {
+		let now = startDate.clone();
+		let dates = [];
+		while (now.isSameOrBefore(endDate)) {
+			dates.push(now.format("YYYY-MM-D H"));
+			now.add(1, "hours");
+		}
+		return dates;
+	};
+
+	const getMinutesBetweenDates = (startDate, endDate, format) => {
+		let now = startDate.clone();
+		let dates = [];
+		while (now.isSameOrBefore(endDate)) {
+			dates.push(now.format("YYYY-MM-D HH:mm"));
+			now.add(1, "minute");
 		}
 		return dates;
 	};
@@ -59,19 +87,23 @@ function Chart({ data }) {
 		const now = moment();
 		let startDate;
 		if (format === "oneWeek") {
-			startDate = moment().subtract(7, "days");
+			startDate = moment().subtract(168, "hours");
 		} else if (format === "oneMonth") {
 			startDate = moment().subtract(30, "days");
 		} else if (format === "sixMonth") {
 			startDate = moment().subtract(6, "months");
+		} else if (format === "oneYear") {
+			startDate = moment().subtract(12, "months");
+		} else if (format === "oneDay") {
+			startDate = moment().subtract(24, "hours");
 		}
-		const dates = getDaysBetweenDates(startDate, now);
 
 		if (format === "oneWeek") {
+			const dates = getHoursBetweenDates(startDate, now);
 			dates.forEach((date) => {
 				const found = data.findIndex((item) => {
 					return (
-						moment(item.Date, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD") === date
+						moment(item.Date, "YYYY-MM-DD H").format("YYYY-MM-DD H") === date
 					);
 				});
 				if (data[found]) {
@@ -79,14 +111,31 @@ function Chart({ data }) {
 				} else {
 					list.push({
 						Value: 0,
-						Date: moment(
-							`${date} ${Math.floor(Math.random() * (23 - 1 + 1) + 1)}`,
-							"YYYY-MM-DD H"
-						).format("YYYY-MM-DD H"),
+						Date: date,
+					});
+				}
+			});
+		} else if (format === "oneDay") {
+			const dates = getMinutesBetweenDates(startDate, now);
+			console.log(dates);
+			dates.forEach((date) => {
+				const found = data.findIndex((item) => {
+					return (
+						moment(item.Date, "YYYY-MM-DD HH:mm").format("YYYY-MM-DD HH:mm") ===
+						date
+					);
+				});
+				if (data[found]) {
+					list.push(data[found]);
+				} else {
+					list.push({
+						Value: 0,
+						Date: date,
 					});
 				}
 			});
 		} else {
+			const dates = getDaysBetweenDates(startDate, now);
 			dates.forEach((date) => {
 				const found = data.findIndex((item) => item.Date === date);
 				if (data[found]) {
@@ -106,31 +155,32 @@ function Chart({ data }) {
 		(format) => {
 			setClicked(format);
 			setDateFormat(format);
-			const timeFormatData = data[0][4][format];
-			let dataWithAllDatesCleaned;
+			const timeFormatData = data[0][4][format] ?? [];
 
-			if (format === "oneWeek" || format === "oneMonth") {
-				dataWithAllDatesCleaned = fillMissingDates(timeFormatData, format);
-			} else if (format === "sixMonth") {
-				dataWithAllDatesCleaned = fillMissingDates(timeFormatData, format);
-			} else {
-				dataWithAllDatesCleaned = timeFormatData;
-			}
+			let dataWithAllDatesCleaned = fillMissingDates(timeFormatData, format);
+
 			let value = dataWithAllDatesCleaned.map((i) => i.Value);
 			value.reverse();
 
 			let date;
 			if (format === "oneYear") {
 				date = dataWithAllDatesCleaned.map((i) => {
-					return moment(i.Date, "YYYY-MM").format("MMM");
+					return moment(i.Date, "YYYY-MM-DD").format("YYYY-MMM-DD");
 				});
 			} else if (format === "oneMonth" || format === "sixMonth") {
 				date = dataWithAllDatesCleaned.map((i) => {
 					return moment(i.Date, "YYYY-MM-DD").format("MMM-DD");
+					// return moment(i.Date, "YYYY-MM-DD").format("YYYY-MMM-DD");
 				});
 			} else if (format === "oneWeek") {
 				date = dataWithAllDatesCleaned.map((i) => {
-					return moment(i.Date, "YYYY-MM-DD H").format("MMM-DD hh:mm A");
+					// return moment(i.Date, "YYYY-MM-DD H").format("MMM-DD");
+					return moment(i.Date, "YYYY-MM-DD H").format("DD-MMM hh:mm");
+				});
+			} else if (format === "oneDay") {
+				date = dataWithAllDatesCleaned.map((i) => {
+					return moment(i.Date, "YYYY-MM-DD HH:mm").format("DD-MMM hh:mm");
+					// return moment(i.Date, "YYYY-MM-DD").format("YYYY-MMM-DD");
 				});
 			} else {
 				date = dataWithAllDatesCleaned.map((i) => {
@@ -184,13 +234,21 @@ function Chart({ data }) {
 			},
 			xaxis: {
 				type: "category",
-				tickAmount: dateFormat === "sixMonth" ? 30 : "dataPoints",
+				tickAmount: tickAmountFormatter(dateFormat),
 				tickPlacement: "on",
 				categories: selection?.date,
 				labels: {
 					formatter: function (value, timestamp) {
 						return value;
 					},
+				},
+				axisTicks: {
+					height: 6,
+					show: true,
+					offsetX: 0,
+					offsetY: 0,
+					color: "#78909C",
+					borderType: "solid",
 				},
 			},
 			marker: {

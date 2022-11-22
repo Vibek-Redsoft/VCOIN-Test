@@ -13,7 +13,6 @@ function NumberBlock(props) {
 		admin,
 		key,
 		cell,
-		switchData,
 		blockValue,
 		blockTitle,
 		checked,
@@ -21,6 +20,8 @@ function NumberBlock(props) {
 	} = props;
 	let underlineClass = isLoaded ? "underline-el light def" : "light def ld-2 ";
 	underlineClass += admin && " green";
+
+	const switchData = false;
 
 	return (
 		<>

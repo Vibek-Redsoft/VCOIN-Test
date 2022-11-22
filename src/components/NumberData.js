@@ -51,36 +51,6 @@ function NumberData(props) {
 
 	const renderTable = (admin) => {
 		return apiData.numbers.map((row, nRow) => {
-			// let filteredData = [];
-			// if (nRow === 1) {
-			// 	row.push({
-			// 		private: false,
-			// 		title: "Total VCOIN Wallets Non Transacted",
-			// 		value: 922,
-			// 		popup: "The number of users who didn't do any VCOIN transactions",
-			// 	});
-
-			// 	row?.map((i) => {
-			// 		if (
-			// 			i.title === "Total VCOIN Wallets Non Transacted" ||
-			// 			i.title === "Total VCOIN Wallets"
-			// 		) {
-			// 			filteredData.push(i);
-			// 		}
-			// 	});
-			// 	row.push({ switchData: filteredData });
-
-			// 	const transactedWalletIndex = row.findIndex(
-			// 		(i) => i.title === "Total VCOIN Wallets Non Transacted"
-			// 	);
-			// 	row.splice(transactedWalletIndex, 1);
-
-			// 	const nonTransactedWalletIndex = row.findIndex(
-			// 		(i) => i.title === "Total VCOIN Wallets"
-			// 	);
-			// 	row.splice(nonTransactedWalletIndex, 1);
-			// }
-
 			return row ? (
 				<tr key={`table-row-${nRow}`}>
 					{row.map((cell, nCell) => {
@@ -95,7 +65,6 @@ function NumberData(props) {
 											popup={cell.popup}
 											isLoaded={isLoaded}
 											admin
-											key={`table-cell-${nCell}`}
 										/>
 									</td>
 								)

@@ -31,7 +31,7 @@ function NumberBlock(props) {
 							<div className="title flex ai-baseline">
 								<span className="relative">{blockTitle}</span>
 								<InfoIcon
-									text={cell.popup}
+									text={popup}
 									key={key}
 									color="#4000FF"
 									className={"info-icon"}

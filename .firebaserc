@@ -1,5 +1,15 @@
 {
-	"projects": {
-		"default": "imvu-vcoin-dashboard"
-	}
+  "projects": {
+    "default": "imvu-vcoin-dashboard"
+  },
+  "targets": {
+    "imvu-vcoin-dashboard": {
+      "hosting": {
+        "imvu-vcoin-dashboard": [
+          "imvu-vcoin-dashboard"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
